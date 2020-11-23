@@ -1,0 +1,67 @@
+@startuml
+skinparam linetype poly
+
+package "Server" {
+    () TCP
+
+    TCP - [Backend]
+}
+
+package "OS" {
+    [USB Socket]
+    [Bluetooth Socket]
+    [NFC Socket]
+
+    database "TPM" as tpm
+}
+
+package "Browser" {
+    TCP <-- [Networking]: "WebAuthn"
+    [CTAP Interface] as ctapi
+}
+
+package "Hardware Authenticators" {
+    component Authenticator
+    Authenticator <---> OS
+}
+
+package "Soft Token Application" {
+    () TCP as TCP2
+    [Biometrics] as bio
+    [CTAP Connector] as conn
+    [Key Management]  as km
+    database "Secure Safe" as db
+    [GUI] as GUI
+    [Monitoring] as mon
+}
+
+package "Drivers" {
+    [USB Driver]        <-down-> [USB Socket]
+    [Bluetooth Driver]  <-down-> [Bluetooth Socket]
+    [NFC Driver]        <-down-> [NFC Socket]
+    [Logging]
+}
+
+
+Networking <-> ctapi
+ctapi <--> OS
+
+GUI -down-> km
+GUI --> conn
+GUI -> mon
+mon -> [Logging]
+conn -down- TCP2
+conn -> km
+km --> db
+km --> tpm
+
+[USB Driver] -> [Logging]
+[Bluetooth Driver] -> [Logging]
+[NFC Driver] -> [Logging]
+TCP2 <--> [USB Driver]
+TCP2 <--> [Bluetooth Driver]
+TCP2 <--> [NFC Driver]
+
+
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+
+package "Soft Token Application" {
+    [Key Management]
+    [CTAP Analyzer]
+    [Logging]
+}
+
+package "OS" {
+
+}
+
+@enduml
