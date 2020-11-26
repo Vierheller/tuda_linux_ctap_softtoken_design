@@ -1,10 +1,21 @@
 @startuml
 skinparam linetype poly
 
-package "Server" {
-    () TCP
+skinparam rectangle {
+    backgroundColor LightGrey
+}
 
-    TCP - [Backend]
+rectangle <<Out Of Scope>> {
+    package "Server" {
+        () TCP
+
+        TCP - [Backend]
+    }
+
+    package "Browser" {
+        TCP <-- [Networking]: "WebAuthn"
+        [CTAP Interface] as ctapi
+    }
 }
 
 package "OS" {
@@ -15,10 +26,7 @@ package "OS" {
     database "TPM" as tpm
 }
 
-package "Browser" {
-    TCP <-- [Networking]: "WebAuthn"
-    [CTAP Interface] as ctapi
-}
+
 
 package "Hardware Authenticators" {
     component Authenticator
@@ -47,7 +55,7 @@ Networking <-> ctapi
 ctapi <--> OS
 
 GUI -down-> km
-GUI --> conn
+GUI <--> conn
 GUI -> mon
 mon -> [Logging]
 conn -down- TCP2
