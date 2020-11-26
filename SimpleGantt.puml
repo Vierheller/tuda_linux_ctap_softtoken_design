@@ -1,0 +1,60 @@
+@startgantt
+printscale weekly
+saturday are closed
+sunday are closed
+
+Project starts 2020-11-09
+
+[Project Setup] lasts 4 weeks
+
+[Project Definition and Design Creation] lasts 1 week
+
+[Project Definition and Design Creation] ends at 2020-11-26
+
+[Technology Familiarization] lasts 2 weeks
+[Technology Familiarization] starts at 2020-11-30
+
+[CTAP Message Monitoring] lasts 4 weeks
+[CTAP Message Monitoring] starts at [Technology Familiarization]'s end
+
+[USB HID Driver] lasts 4 weeks
+[USB HID Driver] starts at [Technology Familiarization]'s end
+
+[Implementation Soft Token] lasts 4 weeks
+[Implementation Soft Token] starts at [Technology Familiarization]'s end
+
+[Graphical User Interface] lasts 2 weeks
+[Graphical User Interface] starts at [Implementation Soft Token]'s end
+
+[Key Management] lasts 2 weeks
+[Key Management] starts at [Implementation Soft Token]'s end
+
+[User and Developer Settings] lasts 2 weeks
+[User and Developer Settings] starts at [Implementation Soft Token]'s end
+
+[TPM Implementation] lasts 2 weeks
+[TPM Implementation] starts at [User and Developer Settings]'s end
+
+[Biometric Sensors] lasts 2 weeks
+[Biometric Sensors] starts at [TPM Implementation]'s end
+
+
+[Project Definition and Design] happens at 2020-11-26
+[Christmas Break] starts 2020-12-23
+[Christmas Break] ends 2021-01-02
+[Alpha Version (internal)] happens at 2021-01-08
+[Beta Version] happens at 2021-02-11
+[Final Code Hand-in] happens at 2021-03-21
+[Final Code Hand-in] happens at 2021-03-21
+[Presentation] happens at 2021-03-26
+
+[Implementation Buffer] lasts 2 weeks
+[Exam buffer] lasts 2 weeks
+[Documentation and final hand-in] lasts 2 weeks
+
+
+[Documentation and final hand-in] ends at [Final Code Hand-in]'s start
+[Exam buffer] ends at [Documentation and final hand-in]'s start
+[Implementation Buffer] ends at [Exam buffer]'s start
+
+@endgantt
