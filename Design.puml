@@ -20,13 +20,9 @@ rectangle <<Out Of Scope>> {
 
 package "OS" {
     [USB Socket]
-    [Bluetooth Socket]
-    [NFC Socket]
 
     database "TPM" as tpm
 }
-
-
 
 package "Hardware Authenticators" {
     component Authenticator
@@ -37,6 +33,7 @@ package "Soft Token Application" {
     () TCP as TCP2
     [Biometrics] as bio
     [CTAP Connector] as conn
+    [CBOR Converter] as cbor
     [Key Management]  as km
     database "Secure Safe" as db
     [GUI] as GUI
@@ -45,8 +42,6 @@ package "Soft Token Application" {
 
 package "Drivers" {
     [USB Driver]        <-down-> [USB Socket]
-    [Bluetooth Driver]  <-down-> [Bluetooth Socket]
-    [NFC Driver]        <-down-> [NFC Socket]
     [Logging]
 }
 
@@ -57,18 +52,16 @@ ctapi <--> OS
 GUI -down-> km
 GUI <--> conn
 GUI -> mon
+GUI -> cbor
 mon -> [Logging]
 conn -down- TCP2
 conn -> km
+conn -> cbor
 km --> db
 km --> tpm
 
 [USB Driver] -> [Logging]
-[Bluetooth Driver] -> [Logging]
-[NFC Driver] -> [Logging]
 TCP2 <--> [USB Driver]
-TCP2 <--> [Bluetooth Driver]
-TCP2 <--> [NFC Driver]
 
 
 
