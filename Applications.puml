@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+package "Browser" {
+    [WebAuthn] as wa
+}
+
+package "Rust" {
+    [USB Driver] as USBD
+    [Backend] as BE
+    [OpenSK] as SK
+}
+
+package "Java" {
+    [Frontend] as FE
+}
+
+database "USB Socket" as USBS{
+}
+
+package "I/O" {
+    database "Sqlite" as ql {
+
+    }
+
+    database "TPM"  as tpm{
+
+    }
+}
+
+
+wa <-> USBS
+USBS <-> USBD
+
+USBD -right-> BE
+BE -> USBD
+
+USBD -> FE
+
+BE --> ql
+BE --> tpm
+
+BE <-> SK
+
+
+FE <--> BE : ""
+
+@enduml
